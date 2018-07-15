@@ -1,0 +1,49 @@
+﻿@model GestionCompte.Models.Users
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Login Application</legend>
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <table>
+            <tr>
+                <td>@Html.LabelFor(u => u.Username)</td>
+                <td>@Html.TextBoxFor(u => u.Username)</td>
+                <td>@Html.ValidationMessageFor(u => u.Username)</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(u => u.Password)
+                </td>
+                <td>
+                    @Html.PasswordFor(u => u.Password)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(u => u.Password)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Login" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}
+

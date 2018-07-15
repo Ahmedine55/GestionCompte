@@ -1,0 +1,50 @@
+﻿@model GestionCompte.Models.Operation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Operation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Compte.CompteID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Compte.CompteID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.typeOperation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.typeOperation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateOperation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateOperation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.montant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.montant)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OperationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
