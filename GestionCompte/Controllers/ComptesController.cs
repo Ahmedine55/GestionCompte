@@ -37,13 +37,16 @@ namespace GestionCompte.Controllers
             return View(compte);
         }
 
+        [Authorize(Roles = "ADMIN")]
         // GET: Comptes/Create
         public ActionResult Create()
         {
+            ViewData["dateCreation"] = DateTime.Now;
             ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "nomClient");
             return View();
         }
 
+        [Authorize(Roles = "ADMIN")]
         // POST: Comptes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -51,6 +54,7 @@ namespace GestionCompte.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CompteID,ClientID,dateCreation,solde")] Compte compte)
         {
+            compte.dateCreation = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Comptes.Add(compte);
@@ -62,6 +66,7 @@ namespace GestionCompte.Controllers
             return View(compte);
         }
 
+        [Authorize(Roles = "ADMIN")]
         // GET: Comptes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -78,6 +83,7 @@ namespace GestionCompte.Controllers
             return View(compte);
         }
 
+        [Authorize(Roles = "ADMIN")]
         // POST: Comptes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -95,6 +101,7 @@ namespace GestionCompte.Controllers
             return View(compte);
         }
 
+        [Authorize(Roles = "ADMIN")]
         // GET: Comptes/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -110,6 +117,7 @@ namespace GestionCompte.Controllers
             return View(compte);
         }
 
+        [Authorize(Roles = "ADMIN")]
         // POST: Comptes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -11,6 +11,7 @@ using GestionCompte.Models.DAL;
 
 namespace GestionCompte.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class RolesController : Controller
     {
         private GcomptesContext db = new GcomptesContext();

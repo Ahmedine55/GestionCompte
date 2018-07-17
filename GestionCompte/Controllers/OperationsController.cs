@@ -11,6 +11,7 @@ using GestionCompte.Models.DAL;
 
 namespace GestionCompte.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class OperationsController : Controller
     {
         private GcomptesContext db = new GcomptesContext();
@@ -40,6 +41,7 @@ namespace GestionCompte.Controllers
         // GET: Operations/Create
         public ActionResult Create()
         {
+            ViewData["dateOperation"] = DateTime.Now;
             ViewBag.CompteID = new SelectList(db.Comptes, "CompteID", "CompteID");
             return View();
         }
@@ -51,10 +53,11 @@ namespace GestionCompte.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OperationID,typeOperation,CompteID,montant")] Operation operation)
         {
+            
             operation.dateOperation = DateTime.Now;
             if (ModelState.IsValid)
             {
-                Compte compte = db.Comptes.Where(s => s.ClientID == operation.CompteID).First();
+                List< compte = db.Comptes.Where(s => s.ClientID == operation.CompteID).First();
                 if (operation.typeOperation.ToString() == "Retrait")
                 {
                     if (compte.solde >= operation.montant)
@@ -83,39 +86,6 @@ namespace GestionCompte.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompteID = new SelectList(db.Comptes, "CompteID", "CompteID", operation.CompteID);
-            return View(operation);
-        }
-
-        // GET: Operations/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Operation operation = db.Operations.Find(id);
-            if (operation == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CompteID = new SelectList(db.Comptes, "CompteID", "CompteID", operation.CompteID);
-            return View(operation);
-        }
-
-        // POST: Operations/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OperationID,typeOperation,CompteID,dateOperation,montant")] Operation operation)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(operation).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
             ViewBag.CompteID = new SelectList(db.Comptes, "CompteID", "CompteID", operation.CompteID);
             return View(operation);
         }

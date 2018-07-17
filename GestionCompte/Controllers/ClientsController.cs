@@ -36,12 +36,14 @@ namespace GestionCompte.Controllers
             return View(client);
         }
 
+        [Authorize(Roles = "ADMIN")]
         // GET: Clients/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "ADMIN")]
         // POST: Clients/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -59,6 +61,7 @@ namespace GestionCompte.Controllers
             return View(client);
         }
 
+        [Authorize(Roles = "ADMIN")]
         // GET: Clients/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -74,6 +77,7 @@ namespace GestionCompte.Controllers
             return View(client);
         }
 
+        [Authorize(Roles = "ADMIN")]
         // POST: Clients/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -90,6 +94,7 @@ namespace GestionCompte.Controllers
             return View(client);
         }
 
+        [Authorize(Roles = "ADMIN")]
         // GET: Clients/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -105,6 +110,7 @@ namespace GestionCompte.Controllers
             return View(client);
         }
 
+        [Authorize(Roles = "ADMIN")]
         // POST: Clients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -14,41 +14,32 @@ namespace GestionCompte.Controllers
 
         private GcomptesContext db = new GcomptesContext();
 
-        // GET: Login
-        public ActionResult Index()
+        
+        public ActionResult Login()
         {
-            UsersViewModel viewModel = new UsersViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
-            if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                if (int.TryParse(HttpContext.User.Identity.Name, out int id))
-                    viewModel.Users = db.Users.FirstOrDefault(u => u.UsersID == id);
-            }
-            return View(viewModel);
+            return View();
         }
 
-        // POST: Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(UsersViewModel viewModel, string returnUrl)
+        public ActionResult Login(Users users, string ReturnUrl)
         {
             if (ModelState.IsValid)
             {
                 using (GcomptesContext db = new GcomptesContext())
                 {
-                    Users us = db.Users.FirstOrDefault(u => u.Username.Equals(viewModel.Users.Username) && u.Password.Equals(viewModel.Users.Password));
+                    var us = db.Users.Where(u => u.Username.Equals(users.Username) && u.Password.Equals(users.Password)).FirstOrDefault();
                     if (us != null)
                     {
                         FormsAuthentication.SetAuthCookie(us.UsersID.ToString(), false);
-                        //Session["UsersID"] = obj.UsersID.ToString();
-                        //Session["UserName"] = obj.Username.ToString();
-                        if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
-                            return Redirect(returnUrl);
-                        return Redirect("/");
+                        Session["username"] = us.Username.ToString();
+                        if (!string.IsNullOrWhiteSpace(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
+                            return Redirect(ReturnUrl);
                     }
                     ModelState.AddModelError("Users.Username", "Username et/ou Password incorrect(s)");
                 }
             }
-            return View(viewModel);
+            return View(users);
         }
 
         public ActionResult UserDashBoard()
@@ -63,7 +54,7 @@ namespace GestionCompte.Controllers
             }
         }
 
-        public ActionResult logout()
+        public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             return Redirect("/");

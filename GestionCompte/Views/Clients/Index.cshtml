@@ -7,7 +7,8 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (User.IsInRole("ADMIN"))
+    {    @Html.ActionLink("Create New", "Create")}
 </p>
 <table class="table">
     <tr>
@@ -29,9 +30,11 @@
             @Html.DisplayFor(modelItem => item.adresseClient)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ClientID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ClientID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ClientID })
+            @Html.ActionLink("Details", "Details", new { id = item.ClientID })
+            @if (User.IsInRole("ADMIN"))
+            {<span>|</span> @Html.ActionLink("Edit", "Edit", new { id = item.ClientID }) <span>|</span>
+             @Html.ActionLink("Delete", "Delete", new { id = item.ClientID })
+            }
         </td>
     </tr>
 }

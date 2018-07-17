@@ -20,19 +20,27 @@
                 @Html.ActionLink("Gestion des comptes", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                @if (User.Identity.IsAuthenticated)
+                { <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Clients", "Index", "Clients")</li>
+                    <li> @Html.ActionLink("Clients", "Index", "Clients")</li>
                     <li>@Html.ActionLink("Comptes", "Index", "Comptes")</li>
-                    <li>@Html.ActionLink("Operations", "Index", "Operations")</li>
-                    <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                    <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
-
-
-
-
-
+                    <li>
+                        @if (User.IsInRole("ADMIN"))
+                        {@Html.ActionLink("Operations", "Index", "Operations")}
+                    </li>
+                    <li>
+                        @if (User.IsInRole("ADMIN"))
+                        {@Html.ActionLink("Users", "Index", "Users")}
+                    </li>
+                    <li>
+                        @if (User.IsInRole("ADMIN"))
+                        {@Html.ActionLink("Roles", "Index", "Roles")}
+                    </li>
                 </ul>
+                <ul class="nav navbar-nav"><li>@Html.ActionLink("Log out", "Logout", "Login")</li></ul>
+                }
+                
             </div>
         </div>
     </div>
