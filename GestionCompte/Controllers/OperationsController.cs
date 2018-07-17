@@ -57,7 +57,7 @@ namespace GestionCompte.Controllers
             operation.dateOperation = DateTime.Now;
             if (ModelState.IsValid)
             {
-                List< compte = db.Comptes.Where(s => s.ClientID == operation.CompteID).First();
+                 compte = db.Comptes.Where(s => s.ClientID == operation.CompteID).First();
                 if (operation.typeOperation.ToString() == "Retrait")
                 {
                     if (compte.solde >= operation.montant)
