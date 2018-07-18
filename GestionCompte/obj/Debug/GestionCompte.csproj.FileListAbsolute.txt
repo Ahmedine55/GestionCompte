@@ -205,3 +205,4 @@ C:\Users\Ahmed\source\repos2\GestionCompte-master\GestionCompte\bin\Microsoft.Ap
 C:\Users\Ahmed\source\repos2\GestionCompte-master\GestionCompte\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\Ahmed\source\repos2\GestionCompte-master\GestionCompte\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Ahmed\source\repos2\GestionCompte-master\GestionCompte\bin\Microsoft.AI.Web.xml
+C:\Users\Ahmed\source\repos2\GestionCompte\GestionCompte\obj\Debug\GestionCompte.csprojAssemblyReference.cache

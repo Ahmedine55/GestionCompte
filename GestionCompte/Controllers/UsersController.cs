@@ -54,7 +54,7 @@ namespace GestionCompte.Controllers
         {
             if (ModelState.IsValid)
             {
-                users.Password = EncodeM5(users.Password);
+               // users.Password = EncodeM5(users.Password);
                 db.Users.Add(users);
                 db.SaveChanges();
                 return RedirectToAction("Index");
